@@ -30,7 +30,7 @@ namespace MyProject
         Rect PlayerHitbox; // хитбокс игрока
         DispatcherTimer timer = new DispatcherTimer(); //таймер для логики игры
 
-        bool moveleft, moveright; 
+        bool moveleft, moveright;
         int EnemyColorCounter = 0, EnemyHeightCounter = 0, EnemyWidthCounter = 0;
         int EnemySpawnTime = 100; // время спавна врагов
         int PlayerSpeed = 10, EnemySpeed = 5; // скорость передвижения
@@ -45,7 +45,7 @@ namespace MyProject
             MyCanvas.Focus(); // пользователь работает только с холстом
 
             ImageBrush background = new ImageBrush();
-            //background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/img/background.png")); // фон игрового окна
+            background.ImageSource = new BitmapImage(new Uri("pack://application:,,,/img/background.png")); // фон игрового окна
             background.Viewport = new Rect(0, 0, 1, 1); // положение и размер фона
             MyCanvas.Background = background;
         }
@@ -57,13 +57,13 @@ namespace MyProject
             scorestatus.Content = "Очки: " + Score;
             damagestatus.Content = "Ущерб: " + Damage;
 
-            if(EnemySpawnTime < 0)
+            if (EnemySpawnTime < 0)
             {
                 EnemiesConstruct();
                 EnemySpawnTime = randspawn.Next(45, 75);
             }
             // движение игрока
-            if(moveleft == true && Canvas.GetLeft(player) > 0)
+            if (moveleft == true && Canvas.GetLeft(player) > 0)
             {
                 Canvas.SetLeft(player, Canvas.GetLeft(player) - PlayerSpeed);
             }
@@ -72,35 +72,35 @@ namespace MyProject
                 Canvas.SetLeft(player, Canvas.GetLeft(player) + PlayerSpeed);
             }
 
-            foreach(var i in MyCanvas.Children.OfType<Rectangle>())
+            foreach (var i in MyCanvas.Children.OfType<Rectangle>())
             {
-                if(i is Rectangle && (string)i.Tag == "bullet") // достаёт объект по тегу bullet
+                if (i is Rectangle && (string)i.Tag == "bullet") // достаёт объект по тегу bullet
                 {
                     Canvas.SetTop(i, Canvas.GetTop(i) - 30); // движение пульки
                     Rect BulletHitbox = new Rect(Canvas.GetLeft(i), Canvas.GetTop(i), i.Width, i.Height); // хитбокс пульки
-                    if(Canvas.GetTop(i) < 0) // добавление объекта в мусорку
+                    if (Canvas.GetTop(i) < 0) // добавление объекта в мусорку
                     {
-                        trash.Add(i);   
+                        trash.Add(i);
                     }
-                    
-                    foreach(var h in MyCanvas.Children.OfType<Rectangle>())
+
+                    foreach (var h in MyCanvas.Children.OfType<Rectangle>())
                     {
-                        if(h is Rectangle && (string)h.Tag == "enemy") // проверка на попадание. Если пулька касается с объектом, имеющим тег enemy
+                        if (h is Rectangle && (string)h.Tag == "enemy") // проверка на попадание. Если пулька касается с объектом, имеющим тег enemy
                         {
                             Rect Hit = new Rect(Canvas.GetLeft(h), Canvas.GetTop(h), h.Width, h.Height);
-                            if(BulletHitbox.IntersectsWith(Hit))
+                            if (BulletHitbox.IntersectsWith(Hit))
                             {
                                 trash.Add(i); trash.Add(h);
                                 if (EnemyColorCounter == 1) Score++;
-                                if (EnemyColorCounter == 2) Score += 1;
-                                if (EnemyColorCounter == 3) Score += 1;
-                                if (EnemyColorCounter == 4) Score += 1;
-                                if (EnemyColorCounter == 5) Score += 1;
+                                if (EnemyColorCounter == 2) Score += 2;
+                                if (EnemyColorCounter == 3) Score += 3;
+                                if (EnemyColorCounter == 4) Score += 4;
+                                if (EnemyColorCounter == 5) Score += 5;
                             }
                         }
                     }
                 }
-                if(i is Rectangle && (string)i.Tag == "enemy") // достаёт объект по тегу enemy
+                if (i is Rectangle && (string)i.Tag == "enemy") // достаёт объект по тегу enemy
                 {
                     Canvas.SetTop(i, Canvas.GetTop(i) + EnemySpeed); // движение врага
                     Rect EnemyHitbox = new Rect(Canvas.GetLeft(i), Canvas.GetTop(i), i.Width, i.Height); // хитбокс врага
@@ -109,33 +109,33 @@ namespace MyProject
                         trash.Add(i); // добавление объекта в мусорку
                         Damage += 10;
                     }
-                    if(PlayerHitbox.IntersectsWith(EnemyHitbox)) // проверяет на касание игрока с противником
+                    if (PlayerHitbox.IntersectsWith(EnemyHitbox)) // проверяет на касание игрока с противником
                     {
                         trash.Add(i); // добавление объекта в мусорку
                         Damage += 5;
                     }
                 }
             }
-            foreach(Rectangle t in trash)
+            foreach (Rectangle t in trash)
             {
                 MyCanvas.Children.Remove(t); // удаление объекта из корзины
             }
 
-            if(Score > 50)
+            if (Score > 50)
             {
                 EnemySpeed = 10;
-                if(Score > 100)
+                if (Score > 100)
                 {
                     EnemySpeed = 15;
                     PlayerSpeed = 13;
                 }
             }
-            if(Damage > 105) // прекращение работы игры
+            if (Damage > 105) // прекращение работы игры
             {
                 timer.Stop();
                 damagestatus.Content = "УНИЧТОЖЕН";
                 damagestatus.Foreground = Brushes.Red;
-                if(Score > 0) MessageBox.Show("Набрано " + Score + " очков! Вы молодец!", "Статус:");
+                if (Score > 0) MessageBox.Show("Набрано " + Score + " очков! Вы молодец!", "Статус:");
                 else MessageBox.Show("Набрано " + Score + " очков :c Попробуйте ещё раз!", "Статус:");
                 Close();
             }
@@ -155,11 +155,11 @@ namespace MyProject
 
         private void key_down(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Left)
+            if (e.Key == Key.Left)
             {
                 moveleft = true;
             }
-            if(e.Key == Key.Right)
+            if (e.Key == Key.Right)
             {
                 moveright = true;
             }
@@ -167,7 +167,11 @@ namespace MyProject
             {
                 Rectangle newbullet = new Rectangle // создаём пульку
                 {
-                    Tag = "bullet", Height = 20, Width = 5, Fill = Brushes.Red, Stroke = Brushes.Blue // параметры пульки
+                    Tag = "bullet",
+                    Height = 20,
+                    Width = 5,
+                    Fill = Brushes.Red,
+                    Stroke = Brushes.Blue // параметры пульки
                 };
 
                 Canvas.SetLeft(newbullet, Canvas.GetLeft(player) + player.Width / 2); // положение пульки
@@ -183,30 +187,33 @@ namespace MyProject
             EnemyWidthCounter = widthrandom.Next(35, 70); // рандомная ширина врага
 
             SolidColorBrush enemycolor = new SolidColorBrush();
-            if(EnemyColorCounter == 1)
+            if (EnemyColorCounter == 1)
             {
-                enemycolor = new SolidColorBrush(Colors.White);
+                enemycolor = new SolidColorBrush(Colors.LemonChiffon);
             }
             if (EnemyColorCounter == 2)
             {
-                enemycolor = new SolidColorBrush(Colors.White);
+                enemycolor = new SolidColorBrush(Colors.Red);
             }
             if (EnemyColorCounter == 3)
             {
-                enemycolor = new SolidColorBrush(Colors.White);
+                enemycolor = new SolidColorBrush(Colors.MediumPurple);
             }
             if (EnemyColorCounter == 4)
             {
-                enemycolor = new SolidColorBrush(Colors.White);
+                enemycolor = new SolidColorBrush(Colors.LightSlateGray);
             }
             if (EnemyColorCounter == 5)
             {
-                enemycolor = new SolidColorBrush(Colors.White);
+                enemycolor = new SolidColorBrush(Colors.Aquamarine);
             }
 
             Rectangle newenemy = new Rectangle // создаём врага
             {
-                Tag = "enemy", Height = EnemyHeightCounter, Width = EnemyWidthCounter, Fill = enemycolor // параметры врага
+                Tag = "enemy",
+                Height = EnemyHeightCounter,
+                Width = EnemyWidthCounter,
+                Fill = enemycolor // параметры врага
             };
 
             Canvas.SetLeft(newenemy, randpos.Next(35, 555)); // положение врага
