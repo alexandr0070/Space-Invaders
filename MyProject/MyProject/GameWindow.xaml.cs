@@ -60,7 +60,7 @@ namespace MyProject
             if (EnemySpawnTime < 0)
             {
                 EnemiesConstruct();
-                EnemySpawnTime = randspawn.Next(45, 75);
+                EnemySpawnTime = randspawn.Next(30, 75);
             }
             // движение игрока
             if (moveleft == true && Canvas.GetLeft(player) > 0)
@@ -96,6 +96,7 @@ namespace MyProject
                                 if (EnemyColorCounter == 3) Score += 3;
                                 if (EnemyColorCounter == 4) Score += 4;
                                 if (EnemyColorCounter == 5) Score += 5;
+                                if (EnemyColorCounter == 6) Score += 6;
                             }
                         }
                     }
@@ -126,11 +127,20 @@ namespace MyProject
                 EnemySpeed = 10;
                 if (Score > 100)
                 {
-                    EnemySpeed = 15;
-                    PlayerSpeed = 13;
+                    EnemySpeed = 12;
+                    PlayerSpeed = 11;
+                    if(Score > 150)
+                    {
+                        EnemySpeed = 14;
+                        if(Score > 200)
+                        {
+                            EnemySpeed = 16;
+                            PlayerSpeed = 14;
+                        }
+                    }
                 }
             }
-            if (Damage > 105) // прекращение работы игры
+            if (Damage > 150) // прекращение работы игры
             {
                 timer.Stop();
                 damagestatus.Content = "УНИЧТОЖЕН";
@@ -174,15 +184,47 @@ namespace MyProject
                     Stroke = Brushes.Blue // параметры пульки
                 };
 
+                Rectangle newbullet2 = new Rectangle // создаём пульку
+                {
+                    Tag = "bullet",
+                    Height = 20,
+                    Width = 5,
+                    Fill = Brushes.Red,
+                    Stroke = Brushes.Blue // параметры пульки
+                };
+
+                Rectangle newbullet3 = new Rectangle // создаём пульку
+                {
+                    Tag = "bullet",
+                    Height = 20,
+                    Width = 5,
+                    Fill = Brushes.Red,
+                    Stroke = Brushes.Blue // параметры пульки
+                };
+
+
                 Canvas.SetLeft(newbullet, Canvas.GetLeft(player) + player.Width / 2); // положение пульки
                 Canvas.SetTop(newbullet, Canvas.GetTop(player) - newbullet.Height);
+
+
+                if(Score > 100)
+                {
+                    Canvas.SetLeft(newbullet2, Canvas.GetLeft(player)); // положение пульки
+                    Canvas.SetTop(newbullet2, Canvas.GetTop(player) - newbullet2.Height);
+
+                    Canvas.SetLeft(newbullet3, Canvas.GetLeft(player) + player.Width); // положение пульки
+                    Canvas.SetTop(newbullet3, Canvas.GetTop(player) - newbullet3.Height);
+                }
                 MyCanvas.Children.Add(newbullet);
+                MyCanvas.Children.Add(newbullet2);
+                MyCanvas.Children.Add(newbullet3);
+
             }
         }
 
         private void EnemiesConstruct()
         {
-            EnemyColorCounter = random.Next(1, 6); // рандомный цвет для врага
+            EnemyColorCounter = random.Next(1, 7); // рандомный цвет для врага
             EnemyHeightCounter = heightrandom.Next(30, 70); // рандомная высота врага
             EnemyWidthCounter = widthrandom.Next(35, 70); // рандомная ширина врага
 
@@ -206,6 +248,10 @@ namespace MyProject
             if (EnemyColorCounter == 5)
             {
                 enemycolor = new SolidColorBrush(Colors.Aquamarine);
+            }
+            if(EnemyColorCounter == 6)
+            {
+                enemycolor = new SolidColorBrush(Colors.Salmon);
             }
 
             Rectangle newenemy = new Rectangle // создаём врага
