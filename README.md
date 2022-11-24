@@ -1,4 +1,4 @@
-# Space-Invaders
+# Space-Invaders (mini-game for pc)
 Лабораторная 4
 
 Создать доску небольшого проекта в Trello, либо аналоги.
