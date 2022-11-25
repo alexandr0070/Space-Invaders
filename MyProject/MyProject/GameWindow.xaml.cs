@@ -50,7 +50,7 @@ namespace MyProject
             MyCanvas.Background = background;
         }
 
-        private void Logic(object sender, EventArgs e) // сама логика игры
+        public void Logic(object sender, EventArgs e) // сама логика игры
         {
             PlayerHitbox = new Rect(Canvas.GetLeft(player), Canvas.GetTop(player), player.Width, player.Height); // создание хитбокса игрока
             EnemySpawnTime -= 1;
@@ -151,7 +151,7 @@ namespace MyProject
             }
         }
 
-        private void key_up(object sender, KeyEventArgs e)
+        public void key_up(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Left)
             {
@@ -163,7 +163,7 @@ namespace MyProject
             }
         }
 
-        private void key_down(object sender, KeyEventArgs e)
+        public void key_down(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Left)
             {
@@ -222,7 +222,7 @@ namespace MyProject
             }
         }
 
-        private void EnemiesConstruct()
+        public void EnemiesConstruct()
         {
             EnemyColorCounter = random.Next(1, 7); // рандомный цвет для врага
             EnemyHeightCounter = heightrandom.Next(30, 70); // рандомная высота врага
