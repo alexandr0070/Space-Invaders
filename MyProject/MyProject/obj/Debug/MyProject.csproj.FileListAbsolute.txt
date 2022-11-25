@@ -21,3 +21,13 @@ E:\VisProjects\MyProject\MyProject\obj\Debug\muscontrol.baml
 E:\VisProjects\MyProject\MyProject\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\VisProjects\MyProject\MyProject\obj\Debug\muscontrol1.g.cs
 E:\VisProjects\MyProject\MyProject\obj\Debug\muscontrol1.baml
+E:\VisProjects\MyProject\MyProject\bin\Debug\Castle.Core.dll
+E:\VisProjects\MyProject\MyProject\bin\Debug\TestStack.White.dll
+E:\VisProjects\MyProject\MyProject\bin\Debug\TestStack.White.Reporting.dll
+E:\VisProjects\MyProject\MyProject\bin\Debug\TestStack.White.ScreenObjects.dll
+E:\VisProjects\MyProject\MyProject\bin\Debug\Castle.Core.xml
+E:\VisProjects\MyProject\MyProject\bin\Debug\TestStack.White.pdb
+E:\VisProjects\MyProject\MyProject\bin\Debug\TestStack.White.xml
+E:\VisProjects\MyProject\MyProject\bin\Debug\TestStack.White.Reporting.pdb
+E:\VisProjects\MyProject\MyProject\bin\Debug\TestStack.White.ScreenObjects.pdb
+E:\VisProjects\MyProject\MyProject\obj\Debug\MyProject.csproj.CopyComplete
